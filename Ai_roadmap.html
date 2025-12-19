@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI/ML/LLM Learning Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            color: #718096;
+            margin-bottom: 10px;
+        }
+        
+        .header .meta {
+            color: #a0aec0;
+            font-size: 0.9em;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+        
+        .phase {
+            position: relative;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .phase:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .phase::before {
+            content: '';
+            position: absolute;
+            left: -50px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 4px solid white;
+            z-index: 2;
+        }
+        
+        .phase.phase-1::before { background: #9f7aea; }
+        .phase.phase-2::before { background: #4299e1; }
+        .phase.phase-3::before { background: #48bb78; }
+        .phase.phase-4::before { background: #ed8936; }
+        .phase.phase-5::before { background: #f56565; }
+        .phase.phase-6::before { background: #667eea; }
+        
+        .phase-header {
+            padding: 25px;
+            cursor: pointer;
+            border-left: 5px solid;
+            transition: background 0.2s;
+        }
+        
+        .phase-header:hover {
+            background: #f7fafc;
+        }
+        
+        .phase-1 .phase-header { border-color: #9f7aea; }
+        .phase-2 .phase-header { border-color: #4299e1; }
+        .phase-3 .phase-header { border-color: #48bb78; }
+        .phase-4 .phase-header { border-color: #ed8936; }
+        .phase-5 .phase-header { border-color: #f56565; }
+        .phase-6 .phase-header { border-color: #667eea; }
+        
+        .phase-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .phase-title h3 {
+            font-size: 1.4em;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+        }
+        
+        .title-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .duration {
+            background: #edf2f7;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #4a5568;
+            font-weight: 600;
+        }
+        
+        .phase-desc {
+            color: #718096;
+            font-size: 0.95em;
+        }
+        
+        .phase-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 25px;
+        }
+        
+        .phase.expanded .phase-content {
+            max-height: 2000px;
+            padding: 0 25px 25px 25px;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s;
+            font-size: 1.5em;
+            color: #a0aec0;
+        }
+        
+        .phase.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .content-section {
+            margin-top: 20px;
+        }
+        
+        .content-section h4 {
+            color: #2d3748;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .topic {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .study-tips {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        
+        .study-tips h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .tip-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tip-card h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #a0aec0;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .timeline {
+                padding-left: 30px;
+            }
+            
+            .phase::before {
+                left: -30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI/ML/LLM Learning Roadmap</h1>
+            <p>Complete journey from foundations to production-ready skills</p>
+            <div class="meta">📅 Total Duration: 12-18 months • 🎯 For Software Engineers</div>
+        </div>
+        
+        <div class="timeline">
+            <!-- Phase 1 -->
+            <div class="phase phase-1" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-title">
+                        <h3><span class="icon">📚</span> Phase 1: Foundation</h3>
+                        <div class="title-right">
+                            <span class="duration">1-2 months</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </div>
+                    <p class="phase-desc">Build mathematical and programming fundamentals</p>
+                </div>
+                <div class="phase-content">
+                    <div class="content-section">
+                        <h4>🎯 Key Topics</h4>
+                        <div class="topics">
+                            <span class="topic">Linear Algebra</span>
+                            <span class="topic">Calculus</span>
+                            <span class="topic">Probability & Statistics</span>
+                            <span class="topic">NumPy</span>
+                            <span class="topic">Pandas</span>
+                            <span class="topic">Matplotlib</span>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <h4>💻 Practice Projects</h4>
+                        <ul class="list">
+                            <li>Data analysis with Pandas</li>
+                            <li>Statistical visualization projects</li>
+                            <li>Matrix operations implementation</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h4>📖 Resources</h4>
+                        <ul class="list">
+                            <li>3Blue1Brown (YouTube)</li>
+                            <li>Mathematics for Machine Learning (book)</li>
+                            <li>Kaggle Learn courses</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 2 -->
+            <div class="phase phase-2" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-title">
+                        <h3><span class="icon">🎯</span> Phase 2: Classical Machine Learning</h3>
+                        <div class="title-right">
+                            <span class="duration">2-3 months</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </div>
+                    <p class="phase-desc">Master traditional ML algorithms and concepts</p>
+                </div>
+                <div class="phase-content">
+                    <div class="content-section">
+                        <h4>🎯 Key Topics</h4>
+                        <div class="topics">
+                            <span class="topic">Supervised Learning</span>
+                            <span class="topic">Unsupervised Learning</span>
+                            <span class="topic">Feature Engineering</span>
+                            <span class="topic">Model Evaluation</span>
+                            <span class="topic">Scikit-learn</span>
+                            <span class="topic">XGBoost</span>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <h4>💻 Practice Projects</h4>
+                        <ul class="list">
+                            <li>House price prediction</li>
+                            <li>Customer churn prediction</li>
+                            <li>Credit card fraud detection</li>
+                            <li>Kaggle competitions</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h4>📖 Resources</h4>
+                        <ul class="list">
+                            <li>Andrew Ng's ML Course</li>
+                            <li>Hands-On Machine Learning (Géron)</li>
+                            <li>Scikit-learn documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 3 -->
+            <div class="phase phase-3" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-title">
+                        <h3><span class="icon">🧠</span> Phase 3: Deep Learning Fundamentals</h3>
+                        <div class="title-right">
+                            <span class="duration">2-3 months</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </div>
+                    <p class="phase-desc">Understand neural networks and deep learning</p>
+                </div>
+                <div class="phase-content">
+                    <div class="content-section">
+                        <h4>🎯 Key Topics</h4>
+                        <div class="topics">
+                            <span class="topic">Neural Networks</span>
+                            <span class="topic">Backpropagation</span>
+                            <span class="topic">CNNs</span>
+                            <span class="topic">RNNs/LSTMs</span>
+                            <span class="topic">PyTorch/TensorFlow</span>
+                            <span class="topic">Regularization</span>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <h4>💻 Practice Projects</h4>
+                        <ul class="list">
+                            <li>MNIST digit classification</li>
+                            <li>CIFAR-10 image classifier</li>
+                            <li>Time series prediction</li>
+                            <li>Simple sentiment analyzer</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h4>📖 Resources</h4>
+                        <ul class="list">
+                            <li>fast.ai Practical Deep Learning</li>
+                            <li>Deep Learning Specialization (Coursera)</li>
+                            <li>PyTorch tutorials</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 4 -->
+            <div class="phase phase-4" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-title">
+                        <h3><span class="icon">💬</span> Phase 4: Natural Language Processing</h3>
+                        <div class="title-right">
+                            <span class="duration">2 months</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </div>
+                    <p class="phase-desc">Learn text processing and sequence models</p>
+                </div>
+                <div class="phase-content">
+                    <div class="content-section">
+                        <h4>🎯 Key Topics</h4>
+                        <div class="topics">
+                            <span class="topic">Text Preprocessing</span>
+                            <span class="topic">Word Embeddings</span>
+                            <span class="topic">Sequence Models</span>
+                            <span class="topic">Attention Mechanism</span>
+                            <span class="topic">NLTK/spaCy</span>
+                            <span class="topic">NER</span>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <h4>💻 Practice Projects</h4>
+                        <ul class="list">
+                            <li>Text classification</li>
+                            <li>Sentiment analysis</li>
+                            <li>Language detection</li>
+                            <li>Simple chatbot</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h4>📖 Resources</h4>
+                        <ul class="list">
+                            <li>Stanford CS224N</li>
+                            <li>Speech and Language Processing (book)</li>
+                            <li>fast.ai NLP course</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 5 -->
+            <div class="phase phase-5" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-title">
+                        <h3><span class="icon">🚀</span> Phase 5: Transformers & LLMs</h3>
+                        <div class="title-right">
+                            <span class="duration">2-3 months</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </div>
+                    <p class="phase-desc">Master modern language models and applications</p>
+                </div>
+                <div class="phase-content">
+                    <div class="content-section">
+                        <h4>🎯 Key Topics</h4>
+                        <div class="topics">
+                            <span class="topic">Transformer Architecture</span>
+                            <span class="topic">BERT & GPT</span>
+                            <span class="topic">Fine-tuning</span>
+                            <span class="topic">Prompt Engineering</span>
+                            <span class="topic">RAG Systems</span>
+                            <span class="topic">Hugging Face</span>
+                            <span class="topic">LangChain</span>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <h4>💻 Practice Projects</h4>
+                        <ul class="list">
+                            <li>Fine-tune BERT classifier</li>
+                            <li>Q&A system with RAG</li>
+                            <li>Custom chatbot with memory</li>
+                            <li>Semantic search engine</li>
+                            <li>Document analyzer</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h4>📖 Resources</h4>
+                        <ul class="list">
+                            <li>Attention Is All You Need (paper)</li>
+                            <li>Hugging Face Course</li>
+                            <li>Andrej Karpathy's videos</li>
+                            <li>Stanford CS25</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phase 6 -->
+            <div class="phase phase-6" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-title">
+                        <h3><span class="icon">⚙️</span> Phase 6: MLOps & Production</h3>
+                        <div class="title-right">
+                            <span class="duration">2 months</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </div>
+                    <p class="phase-desc">Deploy and maintain ML systems in production</p>
+                </div>
+                <div class="phase-content">
+                    <div class="content-section">
+                        <h4>🎯 Key Topics</h4>
+                        <div class="topics">
+                            <span class="topic">Model Deployment</span>
+                            <span class="topic">FastAPI/Flask</span>
+                            <span class="topic">Docker</span>
+                            <span class="topic">Cloud Platforms</span>
+                            <span class="topic">MLflow</span>
+                            <span class="topic">CI/CD</span>
+                            <span class="topic">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <h4>💻 Practice Projects</h4>
+                        <ul class="list">
+                            <li>Deploy model as REST API</li>
+                            <li>Full-stack ML app (Django + ML)</li>
+                            <li>Dockerized ML service</li>
+                            <li>Streamlit dashboard</li>
+                        </ul>
+                    </div>
+                    <div class="content-section">
+                        <h4>📖 Resources</h4>
+                        <ul class="list">
+                            <li>Designing ML Systems (Chip Huyen)</li>
+                            <li>FastAPI documentation</li>
+                            <li>MLflow tutorials</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="study-tips">
+            <h3>📚 Daily Study Strategy</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Theory</h4>
+                    <p>1-2 hours courses/reading</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Practice</h4>
+                    <p>1-2 hours hands-on coding</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Projects</h4>
+                    <p>1 project per month</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>💡 Click on each phase to expand and see detailed information</p>
+            <p style="margin-top: 10px;">Your software engineering background gives you a strong advantage!</p>
+        </div>
+    </div>
+    
+    <script>
+        function togglePhase(element) {
+            element.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
